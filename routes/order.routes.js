@@ -18,7 +18,7 @@ const router = Router();
 
 router.post('/', protect, createOrder);
 
-router.get('/me', protect, findOrders);
+router.get('/:id', protect, findOrders);
 
 router.patch('/:id', protect, updateOrder);
 

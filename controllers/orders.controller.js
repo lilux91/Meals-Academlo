@@ -33,10 +33,12 @@ const findOrder = catchAsync(async (req, res, next) => {
 
 const createOrder = catchAsync(async (req, res, next) => {
   //todo: implementar
-  const { quantity, mealId } = req.body;
+  const { mealId, userId, totalPrice, quantity } = req.body;
   const order = await Order.create({
-    quantity,
     mealId,
+    userId,
+    totalPrice,
+    quantity,
   });
 
   res.status(201).json({
@@ -54,7 +56,7 @@ const updateOrder = catchAsync(async (req, res, next) => {
   // 2. OBTENER UN USUARIO POR SU ID Y QUE EL STATUS SEA PENDING
   const order = await Order.findOne({
     where: {
-      status: 'pending',
+      status: 'active',
       id,
     },
   });
@@ -75,7 +77,7 @@ const deleteOrder = catchAsync(async (req, res, next) => {
   // 2. OBTENER UN USUARIO POR SU ID Y QUE EL STATUS SEA TRUE
   const order = await Order.findOne({
     where: {
-      status: 'pending',
+      //status: 'pending',
       id,
     },
   });
