@@ -97,7 +97,7 @@ class Server {
       .catch(error => console.log(error));
   }
 
-  //METODO PARA ESCUCHAR SOLICITUDES POR EL PUERTO
+  //METODO PARA ESCUCHAR SOLICITUDES peticiones POR EL PUERTO
   listen() {
     this.app.listen(this.port, () => {
       console.log('Server is running in port', this.port);

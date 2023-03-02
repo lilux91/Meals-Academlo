@@ -33,14 +33,35 @@ const findOrder = catchAsync(async (req, res, next) => {
 
 const createOrder = catchAsync(async (req, res, next) => {
   //todo: implementar
+  const { quantity, mealId } = req.body;
+  const order = await Order.create({
+    quantity,
+    mealId,
+  });
+
   res.status(201).json({
     status: 'success',
-    // order,
+    message: 'Order created successfully',
+    order,
   });
 });
 
 const updateOrder = catchAsync(async (req, res, next) => {
   //todo: implementar
+
+  const { id } = req.params;
+
+  // 2. OBTENER UN USUARIO POR SU ID Y QUE EL STATUS SEA PENDING
+  const order = await Order.findOne({
+    where: {
+      status: 'pending',
+      id,
+    },
+  });
+
+  const status = 'completed';
+  await order.update({ status });
+
   res.status(200).json({
     status: 'success',
     message: 'Order updated successfully',
@@ -49,6 +70,20 @@ const updateOrder = catchAsync(async (req, res, next) => {
 
 const deleteOrder = catchAsync(async (req, res, next) => {
   //todo: implementar
+
+  const { id } = req.params;
+  // 2. OBTENER UN USUARIO POR SU ID Y QUE EL STATUS SEA TRUE
+  const order = await Order.findOne({
+    where: {
+      status: 'pending',
+      id,
+    },
+  });
+
+  // 3. REALIZAR LA ACTUALIZACIÓN DEL STATUS DEL USUARIO ENCONTRADO ANTERIORMENTE
+  const status = 'cancelled';
+  await order.update({ status });
+
   res.status(200).json({
     status: 'success',
     message: 'Order deleted successfully',

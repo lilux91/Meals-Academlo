@@ -37,7 +37,7 @@ exports.protect = catchAsync(async (req, res, next) => {
       new AppError('The owner of this token it not longer available', 401)
     );
   }
-
+  //cambio de contraseño
   if (user.passwordChangedAt) {
     const changedTimeStamp = parseInt(
       user.passwordChangedAt.getTime() / 1000,

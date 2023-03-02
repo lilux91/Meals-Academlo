@@ -22,6 +22,9 @@ Review.belongsTo(Restaurant);
 Restaurant.hasMany(Meal);
 Meal.belongsTo(Restaurant);
 
+// Meal.hasOne(Order);
+// Order.belongsTo(Meal);
+
 /* 1Order <--------> 1 Meal */
 Order.hasOne(Meal);
 Meal.belongsTo(Order);

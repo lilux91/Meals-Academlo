@@ -101,6 +101,8 @@ const createReview = catchAsync(async (req, res, next) => {
   //1. OBTENER LA INFORMACION DE LA REQ.BODY
   const { id } = req.params;
   const { comment, rating } = req.body;
+
+  const { sessionUser } = req;
   //2. CREAR EL USUARIO CON LA INFORMACION DE LA REQ.BODY
   const review = await Review.create({
     comment: comment.toLowerCase(),

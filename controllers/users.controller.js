@@ -45,7 +45,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
   const user = await User.create({
     name: name.toLowerCase(),
     email: email.toLowerCase(),
-    password,
+    password: password,
     role, //client or employee
   });
   //3. ENVIAR UNA RESPUESTA AL USUARIO

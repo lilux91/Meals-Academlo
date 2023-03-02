@@ -35,11 +35,12 @@ const createMeal = catchAsync(async (req, res, next) => {
   const { id } = req.params; // idRestaurant
   const { name, price } = req.body;
   const meal = await Meal.create({
-    name,
-    price,
+    name: name.toLowerCase(),
+    price: price,
     restaurantId: id,
     status: 'active',
   });
+
   res.status(201).json({
     status: 'success',
     meal,
@@ -73,7 +74,7 @@ const deleteMeal = catchAsync(async (req, res, next) => {
   });
 
   const status = 'inactive';
-  await restaurant.update({ status });
+  await meal.update({ status });
   res.status(200).json({
     status: 'success',
     message: 'Meal deleted successfully',
